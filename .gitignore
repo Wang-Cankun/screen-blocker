@@ -1,0 +1,16 @@
+# Swift build artifacts
+.build/
+.swiftpm/
+Package.resolved
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.xcodeproj/
+*.xcworkspace/

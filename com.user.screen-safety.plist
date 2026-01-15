@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.user.screen-safety</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/wang.13246/.bun/bin/bun</string>
+        <string>run</string>
+        <string>/Users/wang.13246/.claude/scripts/screen-safety.ts</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/wang.13246/.claude/logs/screen-safety.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/wang.13246/.claude/logs/screen-safety.error.log</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/Users/wang.13246/.bun/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    </dict>
+</dict>
+</plist>
