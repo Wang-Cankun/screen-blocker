@@ -4,7 +4,7 @@
  * Detects risky Chrome tabs when Zoom/Teams is running
  */
 
-const CHECK_INTERVAL_MS = 4000; // 4 seconds
+const CHECK_INTERVAL_MS = 10000; // 10 seconds
 
 // === BLOCKLISTS ===
 const BLOCKED_DOMAINS = [
