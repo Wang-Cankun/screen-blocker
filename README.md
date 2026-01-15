@@ -82,14 +82,14 @@ const BLOCKED_KEYWORDS = [
 ### Check Interval
 
 ```typescript
-const CHECK_INTERVAL_MS = 4000; // 4 seconds
+const CHECK_INTERVAL_MS = 10000; // 10 seconds
 ```
 
 ## Usage
 
 The daemon runs automatically in the background. When a meeting app is detected:
 
-1. Chrome tabs are scanned every 4 seconds
+1. Chrome tabs are scanned every 10 seconds
 2. If sensitive content is found, a fullscreen overlay appears
 3. Click "I Have Closed Sensitive Tabs" or press ESC to dismiss
 
@@ -133,7 +133,7 @@ rm -rf ~/.claude/logs/screen-safety.log
 ┌─────────────────────────────────────────────────────┐
 │             screen-safety.ts (Bun)                  │
 │  ┌───────────────────────────────────────────────┐  │
-│  │  Every 4 seconds:                             │  │
+│  │  Every 10 seconds:                            │  │
 │  │  1. pgrep zoom.us / Microsoft Teams           │  │
 │  │  2. If meeting: AppleScript get Chrome tabs   │  │
 │  │  3. Match against blocklist                   │  │
