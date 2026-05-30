@@ -69,12 +69,29 @@ interface ChromeTab {
 
 // === PROCESS DETECTION ===
 async function isMeetingAppRunning(): Promise<boolean> {
-  const meetingProcesses = ["zoom.us", "Microsoft Teams", "webexmeetings"];
+  // Match only the actual main app processes, not background helpers/updaters/agents
+  const meetingProcesses = [
+    // Zoom: main binary is /Applications/zoom.us.app/Contents/MacOS/zoom.us
+    // Exclude: ZoomUpdater, ZoomAutoUpdater, ZoomDaemon, ZoomUninstaller, ZMScreenshot, ZoomClips, etc.
+    { pattern: "zoom.us", mainBinary: "/MacOS/zoom.us" },
+    // Teams: main binary is /Applications/Microsoft Teams.app/Contents/MacOS/MSTeams
+    // Exclude: com.microsoft.teams2.agent, .respawn, .notificationcenter, TeamsWidgetExtension, etc.
+    { pattern: "Microsoft Teams", mainBinary: "/MacOS/MSTeams" },
+    // WebEx
+    { pattern: "webexmeetings", mainBinary: null },
+  ];
 
   for (const proc of meetingProcesses) {
-    const result = Bun.spawnSync(["pgrep", "-f", proc]);
+    const result = Bun.spawnSync(["pgrep", "-fl", proc.pattern]);
     if (result.exitCode === 0) {
-      return true;
+      const output = result.stdout.toString();
+      const lines = output.trim().split("\n");
+      const hasRealProcess = lines.some(
+        (line) => !proc.mainBinary || line.includes(proc.mainBinary)
+      );
+      if (hasRealProcess) {
+        return true;
+      }
     }
   }
 
